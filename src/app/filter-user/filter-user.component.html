@@ -1,10 +1,17 @@
-<span class="radioClass">Show:</span>
+<table>
+    <tr>
+        <td><span class="radioClass">Show:          </span> </td>
+        <td>
+            <input type="radio" name="options" value="All" [(ngModel)]="currentSelectedValue" (change)="onChangeFilter()" />
+            <span class="radioClass">{{"All(" + all +")" }}</span></td>
+        <td>
 
-<input type="radio" name="options" value="All" [(ngModel)]="currentSelectedValue" (change)="onChangeFilter()" />
-<span class="radioClass">{{"All(" + all +")" }}</span>
-
-<input type="radio" name="options" value="Male" [(ngModel)]="currentSelectedValue" (change)="onChangeFilter()" />
-<span class="radioClass">{{"Male(" + male + ")" }}</span>
-
-<input type="radio" name="options" value="Female" [(ngModel)]="currentSelectedValue" (change)="onChangeFilter()" />
-<span class="radioClass">{{"Female(" + female + ")"}}</span>
+            <input type="radio" name="options" value="Male" [(ngModel)]="currentSelectedValue" (change)="onChangeFilter()" />
+            <span class="radioClass">{{"Male(" + male + ")" }}</span>
+        </td>
+        <td>
+            <input type="radio" name="options" value="Female" [(ngModel)]="currentSelectedValue" (change)="onChangeFilter()" />
+            <span class="radioClass">{{"Female(" + female + ")"}}</span>
+        </td>
+    </tr>
+</table>
