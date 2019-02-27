@@ -1,0 +1,35 @@
+<filter-user [all]="getAllUserCount()" [male]="getMalUserCount()" [female]="getFemalUserCount()" (countRBSelectedChanges)="onUserRBChange($event)"></filter-user>
+
+<div class="col-md-6">
+    <h2> User Details</h2>
+    <button class="btn btn-danger" (click)="addUser()"> Add User</button>
+    <table class="table table-hover">
+        <thead>
+            <tr appHighlight>
+                <th class="hidden">Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Gender</th>
+                <th>annualSalary</th>
+                <th>dataOfBirth</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let user of tmpUser">
+                <tr *ngIf="selectedUserCountRB=='All' || selectedUserCountRB == user!.gender">
+                    <td class="hidden"></td>
+                    <td>{{user?.firstName}}</td>
+                    <td>{{user?.lastName}}</td>
+                    <td>{{user?.gender}}</td>
+                    <td>{{user?.annualSalary | customeCurrency:'EUR':false}}</td>
+                    <td>{{user?.dataOfBirth |date:'shortDate'}}</td>
+                    <td>{{user?.email | emailPipe}}</td>
+                    <td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete</button>
+                        <button class="btn btn-danger" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button></td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
