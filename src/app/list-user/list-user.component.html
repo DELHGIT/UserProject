@@ -22,7 +22,7 @@
                 <tr *ngIf="selectedUserCountRB=='All' || selectedUserCountRB == user!.gender">
                     <td class="hidden"></td>
                     <td>{{user?.firstName}}</td>
-                    <td>{{user?.lastName}}</td>
+                    <td>{{user?.lastName | uppercase}}</td>
                     <td>{{user?.gender}}</td>
                     <td>{{user?.annualSalary | customeCurrency:'EUR':true}}</td>
                     <td>{{user?.dataOfBirth |date:'shortDate'}}</td>

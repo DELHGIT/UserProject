@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from "../service/user.service";
 import {Router} from "@angular/router";
 import {IUser} from "../model/user.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators, FormControl} from "@angular/forms";
 import {first} from "rxjs/operators";
+import { DISABLED } from '@angular/forms/src/model';
 
 @Component({
   selector: 'app-edit-user',
@@ -27,24 +28,36 @@ export class EditUserComponent implements OnInit {
       id: [],
       email: ['', Validators.required],
       firstName: ['', Validators.required],
-      lastName: ['', Validators.required]
+      lastName: ['', Validators.required],
+      annualSalary: ['', Validators.required],
+      gender: new FormControl({value:'',disabled:true},Validators.required),// ['', Validators.required],
+      dataOfBirth: [{value:'',disabled:true}, Validators.required]      
     });
-    this.userService.getUserById(+userId)
+    let user = this.userService.getUserById(1);     
+        this.editForm.setValue(user);
+
+    /*this.userService.getUserById(+userId)
       .subscribe( data => {
         this.editForm.setValue(data);
-      });
+      });*/
   }
 
   onSubmit() {
+    //this.userService.updateUser(this.editForm.value).
     this.userService.updateUser(this.editForm.value)
-      .pipe(first())
+      .pipe(
+        first()
+        )
       .subscribe(
         data => {
+          console.log(data);
+          this.userService.tmpUser = data as IUser[];
           this.router.navigate(['users/list-user']);
         },
         error => {
           alert(error);
         });
+        
   }
 
 }

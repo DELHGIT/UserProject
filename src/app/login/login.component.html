@@ -1,24 +1,38 @@
+<p appHighlight highlightColor="yellow">Highlighted in yellow</p>
+<p appHighlight [highlightColor]="'orange'">Highlighted in orange</p>
+
 <div class="row">
 
     <div class="col-md-6 col-md-offset-2">
         <h1>Login </h1>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-                <label for="email">Email address:</label>
-                <input type="email" class="form-control" formControlName="email" id="email">
-                <!--div *ngIf="submitted && loginForm.controls.email.errors" class="error">
-                    <div *ngIf="loginForm.controls.email.errors.required">Email is required</div>
+                <label>Email address:</label>
+                <input type="email" class="form-control" formControlName="email" id="email" #email>
+                <div *ngIf="submitted && loginForm.controls['email'].errors" class="alert alert-danger">
+                    <div *ngIf="loginForm.controls['email'].errors.required">Email is required</div>
+                </div>
+                <!--div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" class="alert alert-danger">
+                    <div *ngIf="loginForm.controls['email'].errors.required">
+                        Email is required.
+                    </div>
                 </div-->
             </div>
             <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" formControlName="password" id="pwd">
-                <!--div *ngIf="submitted && loginForm.controls.password.errors" class="error">
-                    <div *ngIf="loginForm.controls.password.errors.required">Password is required</div>
+                <label>Password:</label>
+                <input type="password" class="form-control" formControlName="password" id="password" #pwd>
+                <div *ngIf="submitted && loginForm.controls['password'].errors" class="alert alert-danger">
+                    <div *ngIf="loginForm.controls['password'].errors.required">Password is required</div>
+                </div>
+
+                <!--div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="alert alert-danger">
+                    <div *ngIf="loginForm.controls['password'].errors.required">
+                        Password is required.
+                    </div>
                 </div-->
             </div>
-            <button class="btn btn-default">Login</button>
-            <div *ngIf="invalidLogin" class="error">
+            <button class="btn btn-secondary">Login</button>
+            <div *ngIf="invalidLogin" class="alert alert-danger">
                 <div>Invalid credentials.</div>
             </div>
         </form>

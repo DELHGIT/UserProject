@@ -24,11 +24,13 @@ export class ListUserComponent implements OnInit {
       { firstName:"ed4",lastName:"el4",gender:"Female",annualSalary:3500, dataOfBirth:"11/11/2014", email:"ed4@gmail.com", id:4},
       { firstName:"ed5",lastName:"el5",gender:"Male",annualSalary:50000, dataOfBirth:"4/24/1985", email:"ed5@gmail.com", id:5},
       { firstName:"ed6",lastName:"el6",gender:"Male",annualSalary:25000, dataOfBirth:"5/26/1974", email:"ed6@gmail.com", id:6}
-  
     ]
+    this.userService.tmpUser = this.tmpUser;
   }
 
   ngOnInit() {
+    let json = JSON.stringify(this.tmpUser);
+     console.log(json);
     return this.tmpUser;
     /*this.userService.getUsers()
       .subscribe( data => {
