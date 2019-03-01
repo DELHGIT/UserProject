@@ -21,7 +21,11 @@ export class AddUserComponent implements OnInit {
       id: [],
       email: ['', Validators.required],
       firstName: ['', Validators.required],
-      lastName: ['', Validators.required]
+      lastName: ['', Validators.required],
+      isActive: ['', Validators.required],
+      dataOfBirth: ['', Validators.required],
+      annualSalary: ['', Validators.required],
+      gender: ['', Validators.required]
     });
 
   }

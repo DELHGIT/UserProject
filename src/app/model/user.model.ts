@@ -6,6 +6,7 @@ export interface IUser{
     annualSalary:number;
     dataOfBirth:string;
     email:string;
+    isActive:boolean;
     departement?:string;
 
     //computeMonthlySalary(annualSalary:number):number;
@@ -18,6 +19,7 @@ export class User implements IUser{
                 public gender:string,
                 public annualSalary:number,
                 public dataOfBirth:string,
+                public isActive:boolean,
                 public email:string)
     {
         console.log("User ctor");

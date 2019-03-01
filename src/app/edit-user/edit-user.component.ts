@@ -29,11 +29,13 @@ export class EditUserComponent implements OnInit {
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      isActive: ['', Validators.required],
       annualSalary: ['', Validators.required],
       gender: new FormControl({value:'',disabled:true},Validators.required),// ['', Validators.required],
       dataOfBirth: [{value:'',disabled:true}, Validators.required]      
     });
-    let user = this.userService.getUserById(1);     
+    let user = this.userService.getUserById(1);
+    if (user !== undefined)     
         this.editForm.setValue(user);
 
     /*this.userService.getUserById(+userId)

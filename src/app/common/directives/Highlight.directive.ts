@@ -12,15 +12,15 @@ export class HighlightDirective {
 
  @HostListener('mouseenter')
  onMouseEnter() {
-  this.highlight('yellow');
+  this.setHighlight('yellow');
 }
 
 @HostListener('mouseleave') 
 onMouseLeave() {
-  this.highlight('green');
+  this.setHighlight('green');
 }
 
-private highlight(color: string) {
+private setHighlight(color: string) {
   this.el.nativeElement.style.backgroundColor = color;
 }
 

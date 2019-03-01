@@ -1,19 +1,56 @@
 <div class="col-md-6">
     <h2 class="text-center">Add User</h2>
-    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="addForm" novalidate (ngSubmit)="onSubmit()">
+
+
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input formControlName="firstName" placeholder="First Name" name="firstName" #firstName class="form-control" id="firstName">
+        </div>
+
+        <div *ngIf="addForm.controls['firstName'].invalid && (addForm.controls['firstName'].dirty || addForm.controls['firstName'].touched)" class="alert alert-danger">
+            <div *ngIf="addForm.controls['firstName'].errors.required">
+                First Name is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input formControlName="lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <input formControlName="gender" [disabled]="true" name="gender" class="form-control" id="gender">
+        </div>
+
+        <div class="form-group" [class.has-error]="addForm.controls['isActive'].touched && addForm.controls['isActive'].invalid">
+            <div class="form-control">
+                <label for="isActive" class="checkbox-inline control-label">
+                            <input type="checkbox" name="isActive" [required]  formControlName="isActive" #isActive>                    
+                                user is Active
+                        </label>
+            </div>
+            <span class="alert alert-danger" *ngIf="addForm.controls['isActive'].touched && addForm.controls['isActive'].errors?.required">
+                         Is Active is requitred
+                    </span>
+        </div>
+
+
+        <div class="form-group">
+            <label for="dataOfBirth">Data Of Birth:</label>
+            <input type="dataOfBirth" formControlName="dataOfBirth" [disabled]="true" name="dataOfBirth" class="form-control" id="dataOfBirth">
+        </div>
+
+
         <div class="form-group">
             <label for="email">Email address:</label>
             <input type="email" formControlName="email" placeholder="Email" name="email" class="form-control" id="email">
         </div>
 
         <div class="form-group">
-            <label for="firstName">First Name:</label>
-            <input formControlName="firstName" placeholder="First Name" name="firstName" class="form-control" id="firstName">
-        </div>
-
-        <div class="form-group">
-            <label for="lastName">Last Name:</label>
-            <input formControlName="lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
+            <label for="annualSalary">Annual Salary:</label>
+            <input formControlName="annualSalary" placeholder="annualSalary" name="annualSalary" class="form-control" id="annualSalary">
         </div>
 
         <button class="btn btn-success">Update</button>

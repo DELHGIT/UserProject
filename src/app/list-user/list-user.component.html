@@ -13,12 +13,13 @@
                 <th>annualSalary</th>
                 <th>dataOfBirth</th>
                 <th>Email</th>
+                <th>isActive</th>
                 <th>Action</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let user of tmpUser">
+            <ng-container *ngFor="let user of users">
                 <tr *ngIf="selectedUserCountRB=='All' || selectedUserCountRB == user!.gender">
                     <td class="hidden"></td>
                     <td>{{user?.firstName}}</td>
@@ -27,6 +28,9 @@
                     <td>{{user?.annualSalary | customeCurrency:'EUR':true}}</td>
                     <td>{{user?.dataOfBirth |date:'shortDate'}}</td>
                     <td>{{user?.email | emailPipe}}</td>
+                    <td>{{user?.isActive}}
+                        <input type="checkbox" name="isActive" required #isActive [(ngModel)]="user.isActive">
+                    </td>
                     <td><button class="btn btn-primary" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button></td>
                     <td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete</button></td>
                 </tr>

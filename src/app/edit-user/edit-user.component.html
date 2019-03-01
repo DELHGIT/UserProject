@@ -2,6 +2,7 @@
     <h2 class="text-center">Edit User</h2>
     <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
 
+
         <div class="form-group">
             <label for="firstName">First Name:</label>
             <input formControlName="firstName" placeholder="First Name" name="firstName" class="form-control" id="firstName">
@@ -12,10 +13,23 @@
             <input formControlName="lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
         </div>
 
+        <div class="form-group" [class.has-error]="editForm.controls['isActive'].touched && editForm.controls['isActive'].invalid">
+            <div class="form-control">
+                <label for="isActive" class="checkbox-inline control-label">
+                        <input type="checkbox" name="isActive" [required]  formControlName="isActive" #isActive>                    
+                            user is Active
+                    </label>
+            </div>
+            <span class="help-block" *ngIf="editForm.controls['isActive'].touched && editForm.controls['isActive'].errors?.required">
+                     Is Active is requitred
+                </span>
+        </div>
+
         <div class="form-group">
             <label for="gender">Gender:</label>
             <input formControlName="gender" [disabled]="true" name="gender" class="form-control" id="gender">
         </div>
+
 
         <div class="form-group">
             <label for="dataOfBirth">Data Of Birth:</label>

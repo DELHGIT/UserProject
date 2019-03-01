@@ -1,23 +1,4 @@
-<!--progress-bar [progress]="100" [color]="'#488aff'"></progress-bar-->
-
-<nav class="navbar navbar-expand-sm bg-light">
-    <div class="container-fluid">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a routerLink="users/add-user" class="nav-link" routerLinkActive="active">
-                         Create User
-                      </a>
-            </li>
-            <li class="nav-item">
-                <a routerLink="users/list-user" class="nav-link" routerLinkActive="active">
-                    Users
-                   </a>
-            </li>
-
-        </ul>
-    </div>
-</nav>
-
+<app-nav-bar></app-nav-bar>
 <div class="container">
     <router-outlet></router-outlet>
 </div>

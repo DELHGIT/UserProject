@@ -17,6 +17,7 @@ import { CustomeCurrencyPipe } from './common/pipes/currencyPipe.pipe';
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 import { EmailPipePipe } from './common/pipes/emailPipe.pipe';
 import { HighlightDirective } from './common/directives/Highlight.directive';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
    declarations: [AppComponent,
@@ -26,7 +27,7 @@ import { HighlightDirective } from './common/directives/Highlight.directive';
       EditUserComponent, 
       FilterUserComponent,
       CustomeCurrencyPipe ,
-      EmailPipePipe,HighlightDirective],
+      EmailPipePipe,HighlightDirective, NavBarComponent],
    imports: [ BrowserModule,
        routing, 
        ReactiveFormsModule,
