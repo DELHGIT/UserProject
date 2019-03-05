@@ -28,7 +28,7 @@
                     <td>{{user?.annualSalary | customeCurrency:'EUR':true}}</td>
                     <td>{{user?.dataOfBirth |date:'shortDate'}}</td>
                     <td>{{user?.email | emailPipe}}</td>
-                    <td>{{user?.isActive}}
+                    <td>
                         <input type="checkbox" name="isActive" required #isActive [(ngModel)]="user.isActive">
                     </td>
                     <td><button class="btn btn-primary" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button></td>

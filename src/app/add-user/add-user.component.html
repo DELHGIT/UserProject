@@ -1,7 +1,7 @@
 <div class="col-md-6">
     <h2 class="text-center">Add User</h2>
-    <form [formGroup]="addForm" novalidate (ngSubmit)="onSubmit()">
 
+    <form [formGroup]="addForm" novalidate (ngSubmit)="onSubmit()">
 
         <div class="form-group">
             <label for="firstName">First Name:</label>
@@ -18,41 +18,75 @@
             <label for="lastName">Last Name:</label>
             <input formControlName="lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
         </div>
+        <div *ngIf="addForm.controls['lastName'].invalid && (addForm.controls['lastName'].dirty || addForm.controls['lastName'].touched)" class="alert alert-danger">
+            <div *ngIf="addForm.controls['lastName'].errors.required">
+                Last Name is required.
+            </div>
+        </div>
 
         <div class="form-group">
             <label for="gender">Gender:</label>
-            <input formControlName="gender" [disabled]="true" name="gender" class="form-control" id="gender">
+
+            <select formControlName="gender" name="gender" class="form-control" id="gender" [(ngModel)]="addForm.controls['gender'].value">
+                    <option *ngFor="let g of genders" [ngValue]="g.value">{{g.text | uppercase}} </option>
+            </select>
         </div>
 
-        <div class="form-group" [class.has-error]="addForm.controls['isActive'].touched && addForm.controls['isActive'].invalid">
+        <div *ngIf="addForm.controls['gender'].invalid && (addForm.controls['gender'].dirty || addForm.controls['gender'].touched)" class="alert alert-danger">
+            <div *ngIf="addForm.controls['gender'].errors.required">
+                Gender is required.
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="isActive.touched && isActive.invalid">
             <div class="form-control">
-                <label for="isActive" class="checkbox-inline control-label">
+                <label class="checkbox-inline control-label" for="isActive">
                             <input type="checkbox" name="isActive" [required]  formControlName="isActive" #isActive>                    
                                 user is Active
                         </label>
             </div>
-            <span class="alert alert-danger" *ngIf="addForm.controls['isActive'].touched && addForm.controls['isActive'].errors?.required">
-                         Is Active is requitred
-                    </span>
+
         </div>
+        <span class="alert alert-danger" *ngIf="addForm.controls['isActive'].touched && addForm.controls['isActive'].errors?.required">
+                Is Active is requitred.
+           </span>
 
 
         <div class="form-group">
             <label for="dataOfBirth">Data Of Birth:</label>
             <input type="dataOfBirth" formControlName="dataOfBirth" [disabled]="true" name="dataOfBirth" class="form-control" id="dataOfBirth">
         </div>
-
+        <span class="alert alert-danger" *ngIf="addForm.controls['dataOfBirth'].touched && addForm.controls['dataOfBirth'].errors?.required">
+                Data Of Birth is requitred.
+        </span>
 
         <div class="form-group">
             <label for="email">Email address:</label>
-            <input type="email" formControlName="email" placeholder="Email" name="email" class="form-control" id="email">
+            <input type="email" formControlName="email" [maxlength]="50" [email]="addForm.controls['email'].value !==''" required placeholder="Email" name="email" class="form-control" id="email">
         </div>
+        <span class="alert alert-danger" *ngIf="addForm.controls['email'].touched && addForm.controls['email'].errors?.required">
+                Email address is requitred.
+           </span>
+
+        <span class="alert alert-danger" *ngIf="addForm.controls['email'].touched && addForm.controls['email'].errors?.email">
+                Email address invalid.
+           </span>
 
         <div class="form-group">
             <label for="annualSalary">Annual Salary:</label>
             <input formControlName="annualSalary" placeholder="annualSalary" name="annualSalary" class="form-control" id="annualSalary">
         </div>
 
-        <button class="btn btn-success">Update</button>
+        <div *ngIf="addForm.controls['annualSalary'].invalid && (addForm.controls['annualSalary'].dirty || addForm.controls['annualSalary'].touched)" class="alert alert-danger">
+            <div *ngIf="addForm.controls['annualSalary'].errors.required">
+                Annual Salary is required.
+            </div>
+            <div *ngIf="addForm.controls['annualSalary'].errors.pattern">
+                Not a valid number!.
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success" [disabled]="addForm.pristine || addForm.invalid">Add new</button>
+        </div>
     </form>
 </div>

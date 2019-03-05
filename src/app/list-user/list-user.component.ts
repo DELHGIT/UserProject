@@ -13,23 +13,24 @@ import { CustomeCurrencyPipe } from '../common/pipes/currencyPipe.pipe';
 export class ListUserComponent implements OnInit {
 
   users: IUser[];
-
+  
   constructor(private router: Router, private userService: UserService,public customeCurrencyPipe: CustomeCurrencyPipe) { 
-  this.users = this.userService.tmpUser;
+  //this.users = this.userService.tmpUser;
   }
 
   ngOnInit() {
     let json = JSON.stringify(this.users);
      console.log(json);
-    return this.users;
-    /*this.userService.getUsers()
+    //return this.users;
+    this.userService.getUsers()
       .subscribe( data => {
-        this.users = (data as IUser[] ;
-      });*/
+        this.users = (data as IUser[] );
+      })
+      ;
   }
 
   deleteUser(user: IUser): void {
-    this.userService.deleteUser(user.id)
+    this.userService.deleteUser(user["_id"])
       .subscribe( data => {
         this.users = this.users.filter(u => u !== user);
       })
@@ -37,7 +38,7 @@ export class ListUserComponent implements OnInit {
 
   editUser(user: IUser): void {
     localStorage.removeItem("editUserId");
-    localStorage.setItem("editUserId", user.id.toString());
+    localStorage.setItem("editUserId", user["_id"].toString());
     this.router.navigate(['users/edit-user']);
   };
 
@@ -46,18 +47,18 @@ export class ListUserComponent implements OnInit {
   };
   ///  filter methods
   getAllUserCount():number{
-    return (this.users ||  this.users).length;
+    return (this.users || []  ).length;
   }
 
   ///  filter methods
   getMalUserCount():number{
-    return (this.users ||  this.users).filter(user=>user.gender ==="Male").length;
+    return (this.users || []  ).filter(user=>user.gender ==="Male").length;
   }
 
   
   ///  filter methods
   getFemalUserCount():number{
-    return (this.users ||  this.users).filter(user=>user.gender ==="Female").length;
+    return (this.users || []  ).filter(user=>user.gender ==="Female").length;
   }
 
   selectedUserCountRB:string ="All";

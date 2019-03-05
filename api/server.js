@@ -21,9 +21,10 @@ app.use(cors());
 app.use('/users', usersRoute);
 
 app.all('*', function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'URLs to trust of allow');
+    res.header('Content-Type', 'application/json');
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     if ('OPTIONS' == req.method) {
         res.sendStatus(200);
     } else {

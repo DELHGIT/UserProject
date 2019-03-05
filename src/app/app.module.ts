@@ -18,6 +18,9 @@ import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 import { EmailPipePipe } from './common/pipes/emailPipe.pipe';
 import { HighlightDirective } from './common/directives/Highlight.directive';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { MessageService } from './service/message.service';
+import { ErrorHandlerService } from 'e2e/error-handler.service';
+import { UserErrorHandler } from './service/error-handler.service';
 
 @NgModule({
    declarations: [AppComponent,
@@ -35,7 +38,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
        FormsModule, 
        ProgressBarModule],
    exports:    [ CustomeCurrencyPipe ],
-   providers: [AuthenticationService, UserService,CustomeCurrencyPipe,CurrencyPipe, EmailPipePipe,UpperCasePipe],
+   providers: [AuthenticationService, UserService,MessageService,UserErrorHandler, CustomeCurrencyPipe,CurrencyPipe, EmailPipePipe,UpperCasePipe],
    bootstrap: [AppComponent]
 })
 export class AppModule { }

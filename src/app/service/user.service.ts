@@ -1,7 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, ErrorHandler } from '@angular/core';
+import { HttpClient,HttpParams } from '@angular/common/http';
 import {IUser, User} from "../model/user.model";
+import { HttpHeaders } from '@angular/common/http';
+import { HandleError, UserErrorHandler } from './error-handler.service';
 import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +13,10 @@ export class UserService {
 
   baseUrl: string = 'http://localhost:3300/users'; //'http://localhost:4200/users';
   tmpUser:IUser[];
+  private handleError: HandleError;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, errorHandler:UserErrorHandler) { 
+    this.handleError = errorHandler.createHandleError('UserService');
     this.tmpUser = [
       { firstName:"ed1",lastName:"el1",gender:"Male", annualSalary:5500, dataOfBirth:"6/12/1988",  email:"ed1@gmail.com",isActive:true, id:1},
       { firstName:"ed2",lastName:"el2",gender:"Female",annualSalary:5500, dataOfBirth:"12/12/1985", email:"ed2@gmail.com",isActive:true, id:2},
@@ -21,18 +26,21 @@ export class UserService {
       { firstName:"ed6",lastName:"el6",gender:"Male",annualSalary:25000, dataOfBirth:"5/26/1974", email:"ed6@gmail.com",isActive:true, id:6}
     ];
   }
-
+  
   /*getUsers() {
     return this.http.get<IUser[]>(this.baseUrl);
   }*/
 
    getUsers() {
-    return this.http.get(`${this.baseUrl}`);
+    return this.http.get(`${this.baseUrl}`)
+    .pipe(
+      catchError(this.handleError('getUsers', []))
+      );
 }
 
-  getUserById(id: number):IUser {
-    //return this.http.get<IUser>(this.baseUrl + '/' + id);
-    return this.tmpUser[0] ;
+  getUserById(id: number) {
+    return this.http.get<IUser>(this.baseUrl + '/' + id);
+    //return this.tmpUser.filter(x=>x.id === id)[0] ;
   }
 
   editUser(id) {
@@ -47,11 +55,20 @@ export class UserService {
     return this.http.post(`${this.baseUrl}/add`, user);
   }
 
-  updateUser(user: IUser) {
-    return this.http.put(this.baseUrl + '/' + user.id, user);
+  updateUser(user: IUser,userId:any):Observable<IUser> {
+    return this.http.post<IUser>(`${this.baseUrl}/update/${userId}`, user);
+
+    /*const headers = new HttpHeaders().set("Content-Type", "application/json");
+    headers.set('Access-Control-Allow-Origin', '*');
+    headers.set('Access-Control-Allow-Methods', '*');
+    headers.set('Access-Control-Allow-Headers', '*');
+    return this.http.put(`${this.baseUrl}/update/${userId}`, user, {headers});
+   return this.http.put(`${this.baseUrl}/1`, user, {headers});
+
+   //return this.http.put(`${this.baseUrl}/update/${userId}`, user);*/
   }
 
-  deleteUser(id: number) {
-    return this.http.delete(this.baseUrl + '/' + id);
+  deleteUser(id) {
+    return this.http.get(`${this.baseUrl}/delete/${id}`);
   }
 }
