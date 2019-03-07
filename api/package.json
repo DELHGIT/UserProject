@@ -10,9 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "angular4-events": "^5.0.1",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "events": "^3.0.0",
     "express": "^4.16.4",
+    "lodash": "^4.17.11",
     "mongoose": "^5.4.15",
     "rxjs": "^6.4.0"
   },

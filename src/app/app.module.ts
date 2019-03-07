@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -22,6 +22,13 @@ import { MessageService } from './service/message.service';
 import { ErrorHandlerService } from 'e2e/error-handler.service';
 import { UserErrorHandler } from './service/error-handler.service';
 
+import { registerLocaleData } from '@angular/common';
+//i18n
+import localeFr from '@angular/common/locales/fr';
+
+// the second parameter 'fr' is optional
+registerLocaleData(localeFr, 'fr');
+
 @NgModule({
    declarations: [AppComponent,
       LoginComponent,
@@ -38,7 +45,7 @@ import { UserErrorHandler } from './service/error-handler.service';
        FormsModule, 
        ProgressBarModule],
    exports:    [ CustomeCurrencyPipe ],
-   providers: [AuthenticationService, UserService,MessageService,UserErrorHandler, CustomeCurrencyPipe,CurrencyPipe, EmailPipePipe,UpperCasePipe],
+   providers: [{ provide: LOCALE_ID, useValue: 'fr' }, AuthenticationService, UserService,MessageService,UserErrorHandler, CustomeCurrencyPipe,CurrencyPipe, EmailPipePipe,UpperCasePipe],
    bootstrap: [AppComponent]
 })
 export class AppModule { }

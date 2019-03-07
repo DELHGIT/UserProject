@@ -82,4 +82,8 @@ export class EditUserComponent implements OnInit {
         
   }
 
+  onClose(){
+    this.router.navigate(['users/list-user']);
+  }
+
 }

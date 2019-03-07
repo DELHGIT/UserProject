@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {UserService} from "../service/user.service";
 import {IUser} from "../model/user.model";
 import { CustomeCurrencyPipe } from '../common/pipes/currencyPipe.pipe';
+import { i18n } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-list-user',

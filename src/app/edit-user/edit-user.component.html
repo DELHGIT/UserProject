@@ -1,10 +1,10 @@
 <div class="col-md-6">
     <h2 class="text-center">Edit User</h2>
     {{diagnostic}}
-    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="editForm">
 
         <div class="form-group">
-            <label for="firstName">First Name:</label>
+            <label for="firstName" i18n="@@firstnameid">First Name:</label>
             <input formControlName="firstName" placeholder="First Name" name="firstName" class="form-control" id="firstName">
         </div>
         <div *ngIf="editForm.controls['firstName'].invalid && (editForm.controls['firstName'].dirty || editForm.controls['firstName'].touched)" class="alert alert-danger">
@@ -14,7 +14,7 @@
         </div>
 
         <div class="form-group">
-            <label for="lastName">Last Name:</label>
+            <label for="lastName" i18n="@@lastnameid">Last Name:</label>
             <input formControlName="lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
         </div>
         <div *ngIf="editForm.controls['lastName'].invalid && (editForm.get('lastName').dirty || editForm.controls['lastName'].touched)" class="alert alert-danger">
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-            <label for="gender">Gender:</label>
+            <label for="gender" i18n="@@gender">Gender:</label>
             <select formControlName="gender" [disabled]="false" name="gender" class="form-control" id="gender">
                     <option *ngFor="let g of genders" [value]="g.value" [selected]="g.value === editForm.get('gender').value">
                     {{g.text | uppercase}}
@@ -39,7 +39,7 @@
 
         <div class="form-group" [class.has-error]="isActive.touched && isActive.invalid">
             <div class="form-control">
-                <label class="checkbox-inline control-label" for="isActive">
+                <label class="checkbox-inline control-label" for="isActive" i18n="@@isactiveid">
                                 <input type="checkbox" name="isActive" [required]  formControlName="isActive" #isActive>                    
                                     user is Active
                             </label>
@@ -90,7 +90,8 @@
         </div>
 
         <div class="form-group">
-            <button class="btn btn-success" [disabled]="editForm.pristine || editForm.invalid">Update</button>
+            <button class="btn btn-success" (click)="onSubmit()" [disabled]="editForm.pristine || editForm.invalid">Update</button>
+            <button class="btn btn-secondary" (click)="onClose()">Close</button>
         </div>
     </form>
 </div>

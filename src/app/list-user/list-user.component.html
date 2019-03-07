@@ -7,14 +7,14 @@
         <thead>
             <tr appHighlight>
                 <th class="hidden">Id</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Gender</th>
-                <th>annualSalary</th>
-                <th>dataOfBirth</th>
-                <th>Email</th>
-                <th>isActive</th>
-                <th>Action</th>
+                <th i18n="@@firstnameid">FirstName</th>
+                <th i18n="@@lastnameid">LastName</th>
+                <th i18n="@@genderid">Gender</th>
+                <th i18n="@@annualSalary">annualSalary</th>
+                <th i18n="@@dataofbirth">dataOfBirth</th>
+                <th i18n="@@email">Email</th>
+                <th i18n="@@isactive">isActive</th>
+                <th i18n="@@action">Action</th>
                 <th></th>
             </tr>
         </thead>
@@ -25,14 +25,14 @@
                     <td>{{user?.firstName}}</td>
                     <td>{{user?.lastName | uppercase}}</td>
                     <td>{{user?.gender}}</td>
-                    <td>{{user?.annualSalary | customeCurrency:'EUR':true}}</td>
-                    <td>{{user?.dataOfBirth |date:'shortDate'}}</td>
+                    <td>{{user?.annualSalary | currency:'EUR':'symbol'}}</td>
+                    <td>{{user?.dataOfBirth |date:'mediumDate':'UTC/GMT':'en-US'}}</td>
                     <td>{{user?.email | emailPipe}}</td>
                     <td>
                         <input type="checkbox" name="isActive" required #isActive [(ngModel)]="user.isActive">
                     </td>
-                    <td><button class="btn btn-primary" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button></td>
-                    <td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete</button></td>
+                    <td><button class="btn btn-primary" (click)="editUser(user)" style="margin-left: 20px;" i18n="@@edit"> Edit</button></td>
+                    <td><button class="btn btn-danger" (click)="deleteUser(user)" i18n="@@delete"> Delete</button></td>
                 </tr>
             </ng-container>
         </tbody>

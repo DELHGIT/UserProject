@@ -51,6 +51,8 @@ export class UserService {
     return this.http.post(this.baseUrl, user);
   }*/
 
+
+  
   createUser(user: IUser) {
     return this.http.post(`${this.baseUrl}/add`, user);
   }

@@ -1,8 +1,8 @@
 // users.route.js
 
-const express = require('express');
-const app = express();
-const userRoutes = express.Router();
+let express = require('express');
+let app = express();
+let userRoutes = express.Router();
 
 // Require user model in our routes module
 let User = require('../models/User');
@@ -22,6 +22,7 @@ userRoutes.route('/').get(function(req, res) {
 });
 
 // Defined store route
+
 userRoutes.route('/add').post(function(req, res) {
     let user = new User(req.body);
     user.save()
@@ -32,6 +33,7 @@ userRoutes.route('/add').post(function(req, res) {
             res.status(400).send("unable to save to database");
         });
 });
+
 
 
 // Defined edit route
@@ -52,6 +54,10 @@ userRoutes.route('/edit/:id').get(function(req, res) {
   dataOfBirth: { type: String },
   isActive: { type: Boolean }*/
 
+
+//For example, when :user is present in a route path, you may map user loading logic to automatically 
+//provide req.user to the route, or perform validations on the parameter input.
+
 //  Defined update route
 userRoutes.route('/update/:id').post(function(req, res) {
     User.findById(req.params.id, function(err, /*next,*/ user) {
@@ -67,7 +73,8 @@ userRoutes.route('/update/:id').post(function(req, res) {
             user.isActive = req.body.isActive;
 
             user.save().then(user => {
-                    res.json('Update complete');
+                    //res.json('Update complete');
+                    res.json(user);
                 })
                 .catch(err => {
                     res.status(400).send("unable to update the database");
@@ -79,8 +86,10 @@ userRoutes.route('/update/:id').post(function(req, res) {
 // Defined delete | remove | destroy route
 userRoutes.route('/delete/:id').get(function(req, res) {
     User.findByIdAndRemove({ _id: req.params.id }, function(err, user) {
-        if (err) res.json(err);
-        else res.json('Successfully removed');
+        if (err)
+            res.json(err);
+        else
+            res.json('Successfully removed');
     });
 });
 
