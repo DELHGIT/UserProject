@@ -7,10 +7,9 @@ let userRoutes = express.Router();
 // Require user model in our routes module
 let User = require('../models/User');
 
-
 // Defined get data(index or listing) route
 userRoutes.route('/').get(function(req, res) {
-    User.find(function(err, users) {
+    User.find((err, users) => {
         if (err) {
             console.log("GET with Error");
             console.log(err);
@@ -23,7 +22,7 @@ userRoutes.route('/').get(function(req, res) {
 
 // Defined store route
 
-userRoutes.route('/add').post(function(req, res) {
+userRoutes.route('/add').post((req, res) => {
     let user = new User(req.body);
     user.save()
         .then(user => {

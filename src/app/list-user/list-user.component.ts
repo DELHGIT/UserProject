@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {UserService} from "../service/user.service";
 import {IUser} from "../model/user.model";
 import { CustomeCurrencyPipe } from '../common/pipes/currencyPipe.pipe';
+import _ from "lodash";
 import { i18n } from '@angular/core/src/render3';
 
 @Component({
@@ -22,6 +23,7 @@ export class ListUserComponent implements OnInit {
   ngOnInit() {
     let json = JSON.stringify(this.users);
      console.log(json);
+     _.isEmpty({});
     //return this.users;
     this.userService.getUsers()
       .subscribe( data => {

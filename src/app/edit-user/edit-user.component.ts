@@ -74,7 +74,11 @@ export class EditUserComponent implements OnInit {
         data => {
           console.log(data);
           this.user = data as IUser;
-          this.router.navigate(['users/list-user']);
+          this.router.navigate(['users/list-user'])
+          .then(
+            ()=> {localStorage.removeItem("editUserId")},
+            err => { console.log('error :navigate from Edit to List ' + err)}
+            );
         },
         error => {
           alert(error);
@@ -83,7 +87,11 @@ export class EditUserComponent implements OnInit {
   }
 
   onClose(){
-    this.router.navigate(['users/list-user']);
+    this.router.navigate(['users/list-user'])
+    .then(
+      ()=> {localStorage.setItem("editUserId",undefined)},
+      err => { console.log('error :navigate from Edit to List ' + err)}
+      );
   }
 
 }

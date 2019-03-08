@@ -31,11 +31,12 @@ app.use(session({
 }))
 
 app.all('*', (req, res, next) => {
-    res.header('Content-Type', 'application/json');
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    if ('OPTIONS' == req.method) {
+    res.writeHead(200, { 'Content-Type': 'application/json' }, { 'Access-Control-Allow-Origin': '*' }, { 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE' }, { 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept' })
+        /*res.header('Content-Type', 'application/json');
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');*/
+    if (req.method == 'OPTIONS') {
         res.sendStatus(200);
     } else {
         next();
