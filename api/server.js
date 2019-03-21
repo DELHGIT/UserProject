@@ -8,9 +8,11 @@ let cors = require('cors');
 let mongoose = require('mongoose');
 let config = require('./DB');
 let http = require('http');
-let session = require('express-session')
+let session = require('express-session');
 
-let usersRoute = require('./routes/users.route');
+let usersRoute = require('./routes/users.route') ;
+//let usersRoute = require('./routes/UserRouter');
+
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
     () => { console.log('MongoDB : Database is connected') },
@@ -53,5 +55,5 @@ console.log('Bonjour, je lance le serveur.')
 let port = 3300; // process.env.PORT || 4000;
 
 const server = app.listen(port, () => {
-    console.log('Listening on port ' + port);
+    console.log('Listening on port ' + port); 
 });
